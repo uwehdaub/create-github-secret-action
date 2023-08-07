@@ -144,7 +144,7 @@ jobs:
         with:
           name: TEST_UPDATE
           value: ${{ github.sha }}
-          pa_token: ${{ secrets.CREATE_GITHUB_SECRET_ACTION_ON_ORG }}
+          pa_token: ${{ secrets.CREATE_GITHUB_SECRET_ACTION_ON_REPO }}
 
       - name: Assert action output
         if: steps.self.outputs.status != '204'
@@ -173,7 +173,7 @@ jobs:
           org_visibility: ""
           name: CREATE_GITHUB_SECRET_ACTION_TEST
           value: ${{ github.sha }}
-          pa_token: ${{ secrets.PA_TOKEN_ORG_ADMIN }}
+          pa_token: ${{ secrets.CREATE_GITHUB_SECRET_ACTION_ON_ORG }}
 
       - name: Assert action output
         if: steps.self.outputs.status != '204'
