@@ -49,7 +49,7 @@ jobs:
         with:
           name: TEST_${{ github.sha }}
           value: test
-          pa_token: ${{ secrets.CREATE_GITHUB_SECRET_ACTION }}
+          pa_token: ${{ secrets.CREATE_GITHUB_SECRET_ACTION_ON_REPO }}
 
       - name: Assert action output
         if: steps.self.outputs.status != '201'
@@ -63,7 +63,7 @@ jobs:
           repository: ${{ github.repository }}
           secret_name: TEST_${{ github.sha }}
         env:
-          GITHUB_TOKEN: ${{ secrets.CREATE_GITHUB_SECRET_ACTION }}
+          GITHUB_TOKEN: ${{ secrets.CREATE_GITHUB_SECRET_ACTION_ON_REPO }}
 
       - name: Delete secret
         if: always()
@@ -73,7 +73,7 @@ jobs:
           repository: ${{ github.repository }}
           secret_name: TEST_${{ github.sha }}
         env:
-          GITHUB_TOKEN: ${{ secrets.CREATE_GITHUB_SECRET_ACTION }}
+          GITHUB_TOKEN: ${{ secrets.CREATE_GITHUB_SECRET_ACTION_ON_REPO }}
 
   test_repo_location:
     name: test secret creation in foreign repository
@@ -98,7 +98,7 @@ jobs:
           location: ${{ env.FOREIGN_REPO }}
           name: TEST_${{ github.sha }}
           value: test
-          pa_token: ${{ secrets.CREATE_GITHUB_SECRET_ACTION }}
+          pa_token: ${{ secrets.CREATE_GITHUB_SECRET_ACTION_ON_ORG }}
 
       - name: Assert action output
         if: steps.self.outputs.status != '201'
@@ -112,7 +112,7 @@ jobs:
           repository: ${{ env.FOREIGN_REPO }}
           secret_name: TEST_${{ github.sha }}
         env:
-          GITHUB_TOKEN: ${{ secrets.CREATE_GITHUB_SECRET_ACTION }}
+          GITHUB_TOKEN: ${{ secrets.CREATE_GITHUB_SECRET_ACTION_ON_ORG }}
 
       - name: Delete secret
         if: always()
@@ -122,7 +122,7 @@ jobs:
           repository: ${{ env.FOREIGN_REPO }}
           secret_name: TEST_${{ github.sha }}
         env:
-          GITHUB_TOKEN: ${{ secrets.CREATE_GITHUB_SECRET_ACTION }}
+          GITHUB_TOKEN: ${{ secrets.CREATE_GITHUB_SECRET_ACTION_ON_ORG }}
 
   test_update:
     name: test secret update
@@ -144,7 +144,7 @@ jobs:
         with:
           name: TEST_UPDATE
           value: ${{ github.sha }}
-          pa_token: ${{ secrets.CREATE_GITHUB_SECRET_ACTION }}
+          pa_token: ${{ secrets.CREATE_GITHUB_SECRET_ACTION_ON_ORG }}
 
       - name: Assert action output
         if: steps.self.outputs.status != '204'
@@ -217,7 +217,7 @@ jobs:
           GIT_AUTHOR_EMAIL: ${{ github.actor }}@users.noreply.github.com
           GIT_COMMITTER_NAME: ${{ github.actor }}
           GIT_COMMITTER_EMAIL: ${{ github.actor }}@users.noreply.github.com
-          GITHUB_TOKEN: ${{ secrets.CREATE_GITHUB_SECRET_ACTION }}
+          GITHUB_TOKEN: ${{ secrets.CREATE_GITHUB_SECRET_ACTION_ON_REPO }}
 
   cleanup:
     name: cleanup
